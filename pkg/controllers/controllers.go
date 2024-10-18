@@ -15,7 +15,7 @@ func GetBookById(wr http.ResponseWriter, rq *http.Request) {
 }
 
 // Create a new instance of a book:
-func Create(wr http.ResponseWriter, rq *http.Request) {
+func CreateBook(wr http.ResponseWriter, rq *http.Request) {
 
 }
 
