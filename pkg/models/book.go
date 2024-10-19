@@ -30,11 +30,17 @@ func Init() {
 }
 
 // Get all the books from database:
-func GetAllBook() {
+func GetAllBooks() []Book {
+	var Books []Book
+	connection.Find(&Books)
+	return Books
 }
 
 // Get a specific book by its id:
-func GetBookById() {
+func GetBookById(id int64) (*Book, *gorm.DB) {
+	var book Book
+	connection = connection.Where("ID=?", id).Find(&book)
+	return &book, connection
 }
 
 // Create a new instance of a book, returns true if created successfully, false otherwise.
@@ -45,9 +51,14 @@ func CreateBook(book *Book) bool {
 }
 
 // Update info withing an existing instance of a book:
-func UpdateBook() {
+func UpdateBook(id int64, Auth string) {
+	var book Book
+	connection.Model(&book).Where("ID=?", id).Update("Author", Auth)
 }
 
 // Delete a book with a specific id:
-func DeletBook() {
+func DeletBook(id int64) Book {
+	var book Book
+	connection.Where("ID=?", id).Delete(book)
+	return book
 }
